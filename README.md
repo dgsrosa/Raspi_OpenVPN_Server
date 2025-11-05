@@ -1,5 +1,5 @@
 NOT FINISH YET. I WILL MODIFY THE SCRIPT TO DO EVERTHING, PLEASE BE PATIENT.
-Please, run Install_OpenVPN_EasyRSA.py scritp. 
+Please, run Install_OpenVPN_EasyRSA.py script 
 
 This should be enough to set your server listenning on 1194.
 
