@@ -1,9 +1,9 @@
 #!/bin/bash
 
-OVPN_DIR="/home/dougl/ovpn-gerados"
+OVPN_DIR="$(dirname "$0")"
 TA_KEY="/etc/openvpn/ta.key"
-REMOTE_IP="179.189.133.252"
-PORTA="1150"
+REMOTE_IP="YOUR_SERVER"
+PORTA="YOUR_PORT"
 PROTO="udp"
 
 echo "🔍 Validando arquivos .ovpn em $OVPN_DIR..."

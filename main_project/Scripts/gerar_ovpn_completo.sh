@@ -1,15 +1,20 @@
 #!/bin/bash
 
 # Diretórios base
-PKI_DIR="/home/dougl/openvpn-ca/pki"
+PKI_DIR="$HOME/openvpn-ca/pki"
 TA_KEY="/etc/openvpn/ta.key"
-OUTPUT_DIR="/home/dougl/ovpn-gerados"
-REMOTE_HOST="179.189.133.252"
-PORTA="1150"
+OUTPUT_DIR=""
+REMOTE_HOST=""
+PORTA=""
 PROTOCOLO="udp"
 
 # Lista de clientes
-CLIENTES=("client1" "client2" "client3")
+CLIENTES=()
+
+if [[ -z "$OUTPUT_DIR" ]]; then
+  echo "❌ Erro: OUTPUT_DIR não definido"
+  exit 1
+fi
 
 # Cria pasta de saída se não existir
 mkdir -p "$OUTPUT_DIR"
@@ -20,7 +25,9 @@ if [[ ! -r "$TA_KEY" ]]; then
   exit 1
 fi
 
-# Loop para cada cliente
+# Loop para cada cliente, apartir daqui é interativo
+# o cliente o script irá realizar o loop com base nos
+# valores inseridos em validar_ovpn.sh
 for CLIENTE in "${CLIENTES[@]}"; do
   CRT="$PKI_DIR/issued/$CLIENTE.crt"
   KEY="$PKI_DIR/private/$CLIENTE.key"
@@ -41,6 +48,9 @@ persist-tun
 cipher AES-256-CBC
 auth SHA256
 remote-cert-tls server
+dhcp-option DNS 8.8.8.8
+tun-mtu 1400
+mssfix 1360
 verb 3
 
 <ca>
